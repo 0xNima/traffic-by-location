@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  influxdb:
+    image: influxdb:2
+    volumes:
+            - influx:/var/lib/influxdb2:rw
+    env_file:
+      - .env
+    entrypoint: ["./entrypoint.sh"]
+    restart: on-failure:10
+    ports:
+      - 127.0.0.1:${DOCKER_INFLUXDB_INIT_PORT}:8086
+
+  grafana:
+    image: grafana/grafana-oss
+    volumes:
+      - grafana:/var/lib/grafana:rw
+    depends_on:
+      - influxdb
+    ports:
+      - ${GRAFANA_PORT}:3000
+
+volumes:
+  grafana:
+  influx:
