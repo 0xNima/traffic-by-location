@@ -164,11 +164,11 @@ After=network.target
 [Service]
 Type=simple
 WorkingDirectory=$CWD
-ExecStart=./tcpdog --config $CWD/tcpdog/client.yaml
+ExecStart=$CWD/tcpdog/tcpdog --config $CWD/tcpdog/client.yaml
 Restart=on-failure
 RestartSec=10
-StandardOutput=$CWD/tcpdog/tcpdog-client.log
-StandardError=$CWD/tcpdog/tcpdog-client.log
+StandardOutput=append:$CWD/tcpdog/tcpdog-client.log
+StandardError=append:$CWD/tcpdog/tcpdog-client.log
 
 [Install]
 WantedBy=multi-user.target
@@ -191,11 +191,11 @@ After=network.target
 [Service]
 Type=simple
 WorkingDirectory=$CWD
-ExecStart=./tcpdog-server --config $CWD/tcpdog/server.yaml
+ExecStart=$CWD/tcpdog/tcpdog-server --config $CWD/tcpdog/server.yaml
 Restart=on-failure
 RestartSec=10
-StandardOutput=$CWD/tcpdog/tcpdog-server.log
-StandardError=$CWD/tcpdog/tcpdog-server.log
+StandardOutput=append:$CWD/tcpdog/tcpdog-server.log
+StandardError=append:$CWD/tcpdog/tcpdog-server.log
 
 [Install]
 WantedBy=multi-user.target
