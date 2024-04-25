@@ -31,8 +31,8 @@ apt-get install git zip \
     libmlir-17-dev mlir-17-tools \
     libbolt-17-dev bolt-17 \
     flang-17 \
-    libclang-rt-17-dev-wasm32 libclang-rt-17-dev-wasm64 libclang-rt-17-dev-wasm32 libclang-rt-17-dev-wasm64 -y
-apt-get install libc++abi-17-dev-wasm32 libc++-17-dev-wasm32 -y
+    libclang-rt-17-dev-wasm32 libclang-rt-17-dev-wasm64 libclang-rt-17-dev-wasm32 libclang-rt-17-dev-wasm64 -y || echo "Installation failed" && exit
+apt-get install libc++abi-17-dev-wasm32 libc++-17-dev-wasm32 -y 
 
 
 echo """=========---------......---------=========
