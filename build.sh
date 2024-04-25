@@ -243,5 +243,5 @@ echo """=========---------......---------=========
 
 docker compose up -d
 
-service tcpdog-server.service restart
-service tcpdog-cli.service restart
+service tcpdog-server restart
+service tcpdog-cli restart
