@@ -13,6 +13,7 @@ echo "deb http://apt.llvm.org/buster/ llvm-toolchain-buster main" >> /etc/apt/so
 echo "deb-src http://apt.llvm.org/buster/ llvm-toolchain-buster main" >> /etc/apt/sources.list.d/buster.list && \
 echo "deb http://apt.llvm.org/buster/ llvm-toolchain-buster-17 main" >> /etc/apt/sources.list.d/buster.list && \
 echo "deb-src http://apt.llvm.org/buster/ llvm-toolchain-buster-17 main" >> /etc/apt/sources.list.d/buster.list && \
+wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add - && \
 apt-get update && \
 apt-get build-dep bpfcc -y && \
 apt-get install git \
@@ -30,7 +31,8 @@ apt-get install git \
     libmlir-17-dev mlir-17-tools \
     libbolt-17-dev bolt-17 \
     flang-17 \
-    libclang-rt-17-dev-wasm32 libclang-rt-17-dev-wasm64 libc++-17-dev-wasm32 libc++abi-17-dev-wasm32 libclang-rt-17-dev-wasm32 libclang-rt-17-dev-wasm64 -y
+    libclang-rt-17-dev-wasm32 libclang-rt-17-dev-wasm64 libclang-rt-17-dev-wasm32 libclang-rt-17-dev-wasm64 -y
+apt-get install libc++abi-17-dev-wasm32 libc++-17-dev-wasm32 -y
 
 cd /usr/src/
 git clone https://github.com/iovisor/bcc/
