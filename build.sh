@@ -130,8 +130,8 @@ echo """=========---------......---------=========
 |                                          |
 =========---------......---------========="""
 
-org=$(grep -E "DOCKER_INFLUXDB_INIT_ORG" .env | cut -d= -f2)
-token=$(grep -E "DOCKER_INFLUXDB_INIT_ADMIN_TOKEN" .env | cut -d= -f2)
+org=$(grep -E "DOCKER_INFLUXDB_INIT_ORG" $CWD/.env | cut -d= -f2)
+token=$(grep -E "DOCKER_INFLUXDB_INIT_ADMIN_TOKEN" $CWD/.env | cut -d= -f2-)
 
 cat > server.yaml<< EOF
 ingress:
