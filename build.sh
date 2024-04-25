@@ -167,7 +167,7 @@ echo """=========---------......---------=========
 |                                          |
 =========---------......---------========="""
 
-cat > tcpdog-cli.service<< EOF
+cat > /etc/systemd/system/tcpdog-cli.service<< EOF
 [Unit]
 Description=tcpdog client
 After=network.target
@@ -194,7 +194,7 @@ echo """=========---------......---------=========
 =========---------......---------========="""
 
 
-cat > tcpdog-server.service<< EOF
+cat > /etc/systemd/system/tcpdog-server.service<< EOF
 [Unit]
 Description=tcpdog server
 After=network.target
@@ -212,13 +212,7 @@ StandardError=append:$CWD/tcpdog/tcpdog-server.log
 WantedBy=multi-user.target
 EOF
 
-
-cp tcpdog-cli.service /etc/systemd/system/
-cp tcpdog-server.service /etc/systemd/system/
-
 systemctl daemon-reload
-
-
 
 
 echo """=========---------......---------=========
@@ -227,17 +221,18 @@ echo """=========---------......---------=========
 |                                          |
 =========---------......---------========="""
 
-apt install apt-transport-https ca-certificates curl gnupg2 software-properties-common
+apt install apt-transport-https ca-certificates curl gnupg2 software-properties-common -y
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
 add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
 apt update && \
 apt-cache policy docker-ce && \
-apt install docker-ce
+apt install docker-ce -y
 
 service docker restart
 
 cd ..
 
+ufw allow 8086
 
 echo """=========---------......---------=========
 |                                          |
@@ -246,7 +241,7 @@ echo """=========---------......---------=========
 =========---------......---------========="""
 
 
-# docker compose up -d
+docker compose up -d
 
-# service tcpdog-cli.service restart
-# service tcpdog-server.service restart
+service tcpdog-server.service restart
+service tcpdog-cli.service restart
