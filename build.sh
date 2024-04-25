@@ -135,15 +135,8 @@ echo """=========---------......---------=========
 org=$(grep -E "DOCKER_INFLUXDB_INIT_ORG" $CWD/.env | cut -d= -f2)
 token=$(grep -E "DOCKER_INFLUXDB_INIT_ADMIN_TOKEN" $CWD/.env | cut -d= -f2-)
 
-if [ ! -z "$org" -a "$org" != " " ]; then
-        echo "can not extract organization from .env file"
-        exit
-fi
-
-if [ ! -z "$toke" -a "$token" != " " ]; then
-        echo "can not extract token from .env file"
-        exit
-fi
+[ -z "$org" ] && echo "can not extract organization from .env file" && exit
+[ -z "$token" ] && echo "can not extract token from .env file" && exit
 
 cat > server.yaml<< EOF
 ingress:
