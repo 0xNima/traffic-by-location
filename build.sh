@@ -51,7 +51,7 @@ cd bcc/build
 export LLVM_ROOT=/usr/lib/llvm-17
 
 cmake -DPYTHON_CMD=python3 ..
-make
+make || (echo "Building libcc failied" && exit)
 make install
 pushd src/python/
 make
