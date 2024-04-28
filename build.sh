@@ -33,7 +33,7 @@ apt-get install git zip \
     libmlir-17-dev mlir-17-tools \
     libbolt-17-dev bolt-17 \
     flang-17 \
-    libclang-rt-17-dev-wasm32 libclang-rt-17-dev-wasm64 libclang-rt-17-dev-wasm32 libclang-rt-17-dev-wasm64 -y || (echo "Installation failed" && exit)
+    libclang-rt-17-dev-wasm32 libclang-rt-17-dev-wasm64 libclang-rt-17-dev-wasm32 libclang-rt-17-dev-wasm64 -y || echo "Installation failed" && exit
 apt-get install libc++abi-17-dev-wasm32 libc++-17-dev-wasm32 -y 
 
 
@@ -51,7 +51,7 @@ cd bcc/build
 export LLVM_ROOT=/usr/lib/llvm-17
 
 cmake -DPYTHON_CMD=python3 ..
-make || (echo "Building libcc failied" && exit)
+make || echo "Building libcc failied" && exit
 make install
 pushd src/python/
 make
@@ -112,8 +112,8 @@ fields:
   latency:
      - name: PID
      - name: DAddr
-     #- name: Task
-     #- name: SAddr
+     - name: Task
+     - name: SAddr
      #- name: RTT
      #- name: TotalRetrans
 
@@ -232,7 +232,7 @@ add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(
 apt update && \
 apt-cache policy docker-ce && \
 apt install docker-ce -y && \
-service docker restart || (echo "failed to start docker" && exit) 
+service docker restart || echo "failed to start docker" && exit 
 
 cd ..
 
