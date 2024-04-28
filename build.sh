@@ -16,7 +16,9 @@ echo "deb-src http://apt.llvm.org/buster/ llvm-toolchain-buster main" >> /etc/ap
 echo "deb http://apt.llvm.org/buster/ llvm-toolchain-buster-17 main" >> /etc/apt/sources.list.d/buster.list && \
 echo "deb-src http://apt.llvm.org/buster/ llvm-toolchain-buster-17 main" >> /etc/apt/sources.list.d/buster.list && \
 wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add - && \
-apt-get update && \
+
+apt-get update || echo "apt-get update failed" && exit
+
 apt-get build-dep bpfcc -y && \
 apt-get install git zip \
     libllvm-17-ocaml-dev libllvm17 llvm-17 llvm-17-dev llvm-17-doc llvm-17-examples llvm-17-runtime \
@@ -33,7 +35,7 @@ apt-get install git zip \
     libmlir-17-dev mlir-17-tools \
     libbolt-17-dev bolt-17 \
     flang-17 \
-    libclang-rt-17-dev-wasm32 libclang-rt-17-dev-wasm64 libclang-rt-17-dev-wasm32 libclang-rt-17-dev-wasm64 -y || echo "Installation failed" && exit
+    libclang-rt-17-dev-wasm32 libclang-rt-17-dev-wasm64 libclang-rt-17-dev-wasm32 libclang-rt-17-dev-wasm64 -y || (echo "Installation failed" && exit)
 apt-get install libc++abi-17-dev-wasm32 libc++-17-dev-wasm32 -y 
 
 
